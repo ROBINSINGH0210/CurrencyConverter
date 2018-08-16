@@ -12,7 +12,7 @@ public class WebApplication extends SpringBootServletInitializer {
         return application.sources(WebApplication.class);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(WebApplication.class, args);
     }
 }
