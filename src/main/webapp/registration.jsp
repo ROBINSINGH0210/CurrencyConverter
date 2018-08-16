@@ -16,6 +16,7 @@
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -23,7 +24,7 @@
 $.noConflict();
 jQuery(document).ready(function ($) {
     $("#datepicker").datepicker({
-		maxDate : -1,
+		maxDate : -1500,
 		minDate : new Date('1947-01-01'),
 		dateFormat : 'yy-mm-dd',
 		changeMonth : true,

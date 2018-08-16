@@ -12,6 +12,7 @@ import com.currencyConvertor.main.model.User;
 @Component
 public class UserValidator implements Validator {
 
+	private final String NOT_EMPTY = "NotEmpty";
 	@Override
 	public boolean supports(Class<?> aClass) {
 		return User.class.equals(aClass);
@@ -20,16 +21,13 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		User user = (User) o;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", NOT_EMPTY);
 		if (!EmailValidator.getInstance().isValid(user.getEmail())) {
 			errors.rejectValue("email", "invalid.userForm.email");
 		}
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-		if (!PasswordValidator.validatePassword(user.getPassword())) {
-			errors.rejectValue("password", "Size.userForm.password");
-		}
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", NOT_EMPTY);
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dob", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dob", NOT_EMPTY);
 		if (LocalDate.parse(user.getDob()).isAfter(LocalDate.now())) {
 			errors.rejectValue("dob", "after.userForm.dob");
 		}
