@@ -1,13 +1,16 @@
 package com.currencyConvertor.main.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.currency.CurrencyJSON;
 import com.currencyConvertor.main.model.User;
 import com.currencyConvertor.main.service.SecurityService;
 import com.currencyConvertor.main.service.UserService;
@@ -61,4 +64,20 @@ public class UserController {
     public String welcome(Model model) {
         return "welcome";
     }
+    
+    
+    @Cacheable("historicalData")
+    @RequestMapping(value = "/getData" , method = RequestMethod.GET)
+	@ResponseBody
+	public CurrencyJSON getHistoricalData() {
+		return null;
+		
+	}
+	
+	
+	@RequestMapping(value = "/saveData" , method = RequestMethod.GET)
+	@ResponseBody
+	public String saveCurrentData() {
+		return null;
+	}
 }
