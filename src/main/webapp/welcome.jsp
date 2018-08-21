@@ -14,17 +14,12 @@
 <meta name="author" content="">
 
 <title>Create an account</title>
-
-<link href="${contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 <script type="text/javascript">
 	var app = angular.module('app', []);
@@ -34,43 +29,61 @@
 					'getController',
 					function($scope, $http, $location) {
 
-						 $scope.currencyJson  = {
-								 timestamp : 0,
-								 base : "",
-								 rates: {
-								    EUR: 0.0,
-								    USD: 0.0,
-								    GBP: 0.0,
-								    NZD: 0.0,
-								    AUD: 0.0,
-								    JPY: 0.0,
-								    HUF: 0.0,
-								    INR: 0.0
-								  }
-								 };
-						$scope.getAllCustomer = function() {
+						$scope.currencyJson = {
+							'timestamp' : 0,
+							'base' : "",
+							'rates' : {
+								'EUR' : 0.0,
+								'USD' : 0.0,
+								'GBP' : 0.0,
+								'NZD' : 0.0,
+								'AUD' : 0.0,
+								'JPY' : 0.0,
+								'HUF' : 0.0,
+								'INR' : 0.0
+							}
+						};
+						$scope.saveData = function(){
+							$http(
+									{
+										method : 'POST',
+										url : 'http://localhost:8080/saveData',
+										data: $scope.currencyJson,
+								        headers: {
+								            'Content-Type': 'application/json; charset=utf-8'
+								        }
+									})
+									.then(
+											function successCallback(response) {
+												console.log(response.data);
+												$scope.getDivAvailable = true;
+												$scope.currencyJson.timestamp = response.data.timestamp;
+												$scope.currencyJson = response.data;
+											},
+											function errorCallback(response) {
+												console.log(response);
+											});
+							
+						}
+						
+						$scope.getCurrentRates = function() {
 
 							$http(
 									{
 										method : 'GET',
 										url : 'http://openexchangerates.org/api/latest.json?app_id=f1ef152621a3428e885d0ceb265fe7ba'
-									}).then(function successCallback(response) {
-								console.log(response.data);
-								$scope.getDivAvailable = true;
-								$scope.currencyJson.timestamp = response.data.timestamp;
-								$scope.currencyJson.base = response.data.base;
-								$scope.currencyJson.rates.USD = response.data.rates.USD;
-								$scope.currencyJson.rates.EUR = response.data.rates.EUR;
-								$scope.currencyJson.rates.JPY = response.data.rates.JPY;
-								$scope.currencyJson.rates.GBP = response.data.rates.GBP;
-								$scope.currencyJson.rates.NZD = response.data.rates.NZD;
-								$scope.currencyJson.rates.AUD = response.data.rates.AUD;
-								$scope.currencyJson.rates.HUF = response.data.rates.HUF;
-								$scope.currencyJson.rates.INR = response.data.rates.INR;
-							}, function errorCallback(response) {
-								console.log(response);
-							});
-
+									})
+									.then(
+											function successCallback(response) {
+												console.log(response.data);
+												$scope.getDivAvailable = true;
+												$scope.currencyJson = response.data;
+												alert(JSON.stringify($scope.currencyJson));
+												$scope.saveData();
+											},
+											function errorCallback(response) {
+												console.log(response);
+											});
 						}
 
 					});
@@ -81,18 +94,16 @@
 
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 			<form id="logoutForm" method="POST" action="${contextPath}/logout">
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</form>
 
 			<h2>
-				Welcome ${pageContext.request.userPrincipal.name} | <a
-					onclick="document.forms['logoutForm'].submit()">Logout</a>
+				Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
 			</h2>
 
 		</c:if>
 
-		<div class="row col-md-6">
+		<div class="row col-md-12">
 
 			<!-- ###################### -->
 			<!-- GET CONTROLLER -->
@@ -124,28 +135,24 @@
 					</ul>
 				</div>
 			</div> -->
-			
-			
+
+
 			<div ng-controller="getController">
-				<button ng-click="getAllCustomer()" type="button"
-					class="btn btn-primary" style="margin: 10px 0px 10px 0px;">Get
+				<button ng-click="getCurrentRates()" type="button" class="btn btn-primary" style="margin: 10px 0px 10px 0px;">Get
 					Current Data</button>
-				<div
-					style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px"
-					ng-if="getDivAvailable">
-					Publish Date:{{currencyJson.timestamp *1000 | date:'dd/MMMM/yyyy'}}, {{"Rates Base: " + currencyJson.base}} 
-					</br>
-					Currency Rates::- {{"USD : " + currencyJson.rates.USD + ", EUR : " + currencyJson.rates.EUR + ", GBP : "+ currencyJson.rates.GBP + ", NZD : "+ currencyJson.rates.NZD+ ", AUD : "+ currencyJson.rates.AUD+ ", JPY : "+ currencyJson.rates.JPY+ ", HUF : "+ currencyJson.rates.HUF+ ", INR : "+ currencyJson.rates.INR}}
+				<div style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px" ng-if="getDivAvailable">
+					Publish Date:{{currencyJson.timestamp *1000 | date:'dd/MMMM/yyyy'}}, {{"Rates Base: " + currencyJson.base}} </br> <strong>Current
+						Currency Rates:-</strong> {{"USD : " + currencyJson.rates.USD + ", EUR : " + currencyJson.rates.EUR + ", GBP : "+
+					currencyJson.rates.GBP + ", NZD : "+ currencyJson.rates.NZD+ ", AUD : "+ currencyJson.rates.AUD+ ", JPY : "+
+					currencyJson.rates.JPY+ ", HUF : "+ currencyJson.rates.HUF+ ", INR : "+ currencyJson.rates.INR}}
 				</div>
-				</br>
-				<button ng-click="getAllCustomer()" type="button" class="btn btn-primary" style="margin: 10px 0px 10px 0px;">Get
+				</br> </br>
+				<button ng-click="getPreviousRates()" type="button" class="btn btn-primary" style="margin: 10px 0px 10px 0px;">Get
 					Previous Data</button>
-				<div
-					style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px"
-					ng-if="getDivAvailable">				
-					
+				<div style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px" ng-if="getDivAvailable">
+
 					<ul>
-						<li ng-repeat="cust in currencyJson">{{cust}}</li>
+						<li ng-repeat="curr in prevRatesJson">{{cust}}</li>
 					</ul>
 				</div>
 			</div>
@@ -156,6 +163,6 @@
 
 
 	<!-- /container -->
-	
+
 </body>
 </html>
