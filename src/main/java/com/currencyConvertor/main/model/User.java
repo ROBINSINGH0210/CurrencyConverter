@@ -5,14 +5,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
-	private Long id;
-	@Column(unique=true)
-	private String email;
-	private String password;
-	private String dob;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(unique = true)
+	private String email;
+	@Column
+	private String password;
+	@Column
+	private String dob;
+
 	public Long getId() {
 		return id;
 	}

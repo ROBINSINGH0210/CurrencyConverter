@@ -30,6 +30,8 @@ jQuery(document).ready(function ($) {
 		changeMonth : true,
 		changeYear : true
 	});
+    
+    $("#datepicker").keypress(function(event) {event.preventDefault();});
 });
  
 </script>
@@ -52,7 +54,7 @@ jQuery(document).ready(function ($) {
 			<spring:bind path="dob">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:input id="datepicker" type="text" path="dob"
-						class="form-control" required="true"></form:input>
+						class="form-control" placeholder="Date Of Birth" required="true"></form:input>
 					<form:errors path="dob"></form:errors>
 				</div>
 			</spring:bind>
@@ -60,8 +62,8 @@ jQuery(document).ready(function ($) {
 			<spring:bind path="password">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:input type="password" id="psw" class="form-control"
-						name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}"
-						path="password"
+						name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,20}"
+						path="password" placeholder="Password"
 						title="Must contain at least one number and one uppercase and lowercase letter."
 						required="true"></form:input>
 					<form:errors path="password"></form:errors>

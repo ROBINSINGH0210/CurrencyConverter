@@ -2,6 +2,8 @@ package com.currencyConvertor.main.web;
 
 import java.util.List;
 
+import javax.persistence.NonUniqueResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
@@ -45,9 +47,13 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
+        try {
         userService.save(userForm);
-
+        }catch(NonUniqueResultException ex) {
+        	bindingResult.rejectValue("email", "invalid.userForm.existEmail");
+        	return "registration";
+        }
+        
         securityService.autologin(userForm.getEmail(), userForm.getPassword());
 
         return "redirect:/welcome";
