@@ -34,8 +34,6 @@ public class Rates implements Serializable {
 
 	@JsonProperty("USD")
 	private Integer uSD;
-//	@JsonIgnore
-//	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	private final static long serialVersionUID = 8334387487048356370L;
 
 	@JsonProperty("AUD")
@@ -118,15 +116,15 @@ public class Rates implements Serializable {
 		this.uSD = uSD;
 	}
 
-//	@JsonAnyGetter
-//	public Map<String, Object> getAdditionalProperties() {
-//		return this.additionalProperties;
-//	}
-//
-//	@JsonAnySetter
-//	public void setAdditionalProperty(String name, Object value) {
-//		this.additionalProperties.put(name, value);
-//	}
+	// @JsonAnyGetter
+	// public Map<String, Object> getAdditionalProperties() {
+	// return this.additionalProperties;
+	// }
+	//
+	// @JsonAnySetter
+	// public void setAdditionalProperty(String name, Object value) {
+	// this.additionalProperties.put(name, value);
+	// }
 
 	@Override
 	public String toString() {
