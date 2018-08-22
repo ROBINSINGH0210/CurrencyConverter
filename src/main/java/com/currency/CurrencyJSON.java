@@ -1,63 +1,32 @@
 package com.currency;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "disclaimer", "license", "timestamp", "base", "rates" })
+@JsonPropertyOrder({ "timestamp", "base", "rates" })
 public class CurrencyJSON implements Serializable {
-
-	@JsonProperty("disclaimer")
-	private String disclaimer;
-	@JsonProperty("license")
-	private String license;
 	@JsonProperty("timestamp")
-	private Integer timestamp;
+	private Long timestamp;
 	@JsonProperty("base")
 	private String base;
 	@JsonProperty("rates")
 	private Rates rates;
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	private final static long serialVersionUID = 5089017721980439372L;
 
-	@JsonProperty("disclaimer")
-	public String getDisclaimer() {
-		return disclaimer;
-	}
-
-	@JsonProperty("disclaimer")
-	public void setDisclaimer(String disclaimer) {
-		this.disclaimer = disclaimer;
-	}
-
-	@JsonProperty("license")
-	public String getLicense() {
-		return license;
-	}
-
-	@JsonProperty("license")
-	public void setLicense(String license) {
-		this.license = license;
-	}
-
 	@JsonProperty("timestamp")
-	public Integer getTimestamp() {
+	public Long getTimestamp() {
 		return timestamp;
 	}
 
 	@JsonProperty("timestamp")
-	public void setTimestamp(Integer timestamp) {
+	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
 
@@ -81,21 +50,12 @@ public class CurrencyJSON implements Serializable {
 		this.rates = rates;
 	}
 
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("disclaimer", disclaimer).append("license", license)
-				.append("timestamp", timestamp).append("base", base).append("rates", rates)
-				.append("additionalProperties", additionalProperties).toString();
+		StringBuilder builder = new StringBuilder();
+		builder.append("CurrencyJSON [timestamp=").append(timestamp).append(", base=").append(base).append(", rates=")
+				.append(rates).append("]");
+		return builder.toString();
 	}
 
 }

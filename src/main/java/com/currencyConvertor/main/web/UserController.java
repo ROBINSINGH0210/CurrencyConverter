@@ -1,7 +1,6 @@
 package com.currencyConvertor.main.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.MultivaluedMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -74,16 +73,15 @@ public class UserController {
     @Cacheable("historicalData")
     @RequestMapping(value = "/getData" , method = RequestMethod.GET)
 	@ResponseBody
-	public CurrencyJSON getHistoricalData() {
-		return null;
-		
+	public List<CurrencyJSON> getHistoricalData() {
+		return userService.getPreviousDetails();
 	}
 	
 	
 	@RequestMapping(value = "/saveData" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String saveCurrentData(@RequestBody CurrencyJSON request, HttpServletRequest request1) {
-//		request1.getreq
+	public String saveCurrentData(@RequestBody CurrencyJSON request) {
+		userService.saveCurrencyDetails(request);
 		return null;
 	}
 }
