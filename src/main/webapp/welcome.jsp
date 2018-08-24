@@ -108,7 +108,7 @@
 				<button ng-click="getCurrentRates()" type="button" class="btn btn-primary" style="margin: 10px 0px 10px 0px;">Get
 					Current Data</button>
 				<div style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px" ng-if="getDivAvailable">
-					Publish Date:{{currencyJson.timestamp | date:'dd/MMMM/yyyy'}}, {{"Rates Base: " + currencyJson.base}} </br> <strong>Current
+					<strong>Publish Date:</strong>{{currencyJson.timestamp | date:'dd/MMMM/yyyy'}}, {{"Rates Base: " + currencyJson.base}} </br> <strong>Current
 						Currency Rates:-</strong> {{"USD : " + currencyJson.rates.USD + ", EUR : " + currencyJson.rates.EUR + ", GBP : "+
 					currencyJson.rates.GBP + ", NZD : "+ currencyJson.rates.NZD+ ", AUD : "+ currencyJson.rates.AUD+ ", JPY : "+
 					currencyJson.rates.JPY+ ", HUF : "+ currencyJson.rates.HUF+ ", INR : "+ currencyJson.rates.INR}}
@@ -118,7 +118,7 @@
 					Previous Data</button>
 				<div style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px" ng-if="getHistDivAvailable">
 					<ul>
-						<li ng-repeat="curr in histCurrData">Publish Date:{{curr.timestamp | date:'dd/MMMM/yyyy'}}, {{"Rates Base: "
+						<li ng-repeat="curr in histCurrData"><strong>Publish Date:</strong> {{curr.timestamp | date:'dd/MMMM/yyyy'}}, {{"Rates Base: "
 							+ curr.base}} </br> <strong>Currency Rates:-</strong> {{"USD : " + curr.rates.USD + ", EUR : " +
 							curr.rates.EUR + ", GBP : "+ curr.rates.GBP + ", NZD : "+ curr.rates.NZD+ ", AUD : "+ curr.rates.AUD+ ", JPY : "+
 							curr.rates.JPY+ ", HUF : "+ curr.rates.HUF+ ", INR : "+ curr.rates.INR}}
