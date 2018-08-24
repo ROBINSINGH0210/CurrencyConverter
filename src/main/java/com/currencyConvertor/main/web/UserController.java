@@ -24,67 +24,58 @@ import com.currencyConvertor.main.validator.UserValidator;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
+	@Autowired
+	private SecurityService securityService;
 
-    @Autowired
-    private UserValidator userValidator;
+	@Autowired
+	private UserValidator userValidator;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public String registration(Model model) {
+		model.addAttribute("userForm", new User());
 
-        return "registration";
-    }
+		return "registration";
+	}
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+		userValidator.validate(userForm, bindingResult);
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-        try {
-        userService.save(userForm);
-        }catch(NonUniqueResultException ex) {
-        	bindingResult.rejectValue("email", "invalid.userForm.existEmail");
-        	return "registration";
-        }
-        
-        securityService.autologin(userForm.getEmail(), userForm.getPassword());
+		if (bindingResult.hasErrors())
+			return "registration";
 
-        return "redirect:/welcome";
-    }
+		userService.save(userForm);
+		securityService.autologin(userForm.getEmail(), userForm.getPassword());
+		return "redirect:/welcome";
+	}
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model, String error, String logout) {
+		if (error != null)
+			model.addAttribute("error", "Your username and password is invalid.");
 
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+		if (logout != null)
+			model.addAttribute("message", "You have been logged out successfully.");
 
-        return "login";
-    }
+		return "login";
+	}
 
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
-    }
-    
-    
-    @Cacheable("historicalData")
-    @RequestMapping(value = "/getData" , method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+	public String welcome(Model model) {
+		return "welcome";
+	}
+
+	@Cacheable("historicalData")
+	@RequestMapping(value = "/getData", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CurrencyJSON> getHistoricalData() {
 		return userService.getPreviousDetails();
 	}
-	
-	
-	@RequestMapping(value = "/saveData" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+	@RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String saveCurrentData(@RequestBody CurrencyJSON request) {
 		return userService.saveCurrencyDetails(request);
