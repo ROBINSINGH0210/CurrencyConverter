@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CurrencyHistory")
@@ -17,6 +19,7 @@ public class CurrencyEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(unique = true)
+	@Temporal(TemporalType.DATE)
 	private Date callDate;
 	@Column
 	private String base;

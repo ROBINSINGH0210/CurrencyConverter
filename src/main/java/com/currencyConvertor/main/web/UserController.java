@@ -73,7 +73,7 @@ public class UserController {
 		return userService.getPreviousDetails();
 	}
 
-	@RequestMapping(value = "/saveData", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String saveCurrentData(@RequestBody CurrencyJSON request) {
 		return userService.saveCurrencyDetails(request);
