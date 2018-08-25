@@ -1,25 +1,19 @@
 package com.currencyConvertor.main.service;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.h2.jdbc.JdbcSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.currency.CurrencyJSON;
-import com.currency.Rates;
+import com.currencyConvertor.json.CurrencyJSON;
+import com.currencyConvertor.json.Rates;
 import com.currencyConvertor.main.model.CurrencyEntity;
 import com.currencyConvertor.main.model.User;
 import com.currencyConvertor.main.repository.CurrencyRepository;
 import com.currencyConvertor.main.repository.UserRepository;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service

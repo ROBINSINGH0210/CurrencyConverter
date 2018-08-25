@@ -1,4 +1,4 @@
-package com.currency;
+package com.currencyConvertor.json;
 
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

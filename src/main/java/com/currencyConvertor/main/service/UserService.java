@@ -2,7 +2,7 @@ package com.currencyConvertor.main.service;
 
 import java.util.List;
 
-import com.currency.CurrencyJSON;
+import com.currencyConvertor.json.CurrencyJSON;
 import com.currencyConvertor.main.model.User;
 
 public interface UserService {
