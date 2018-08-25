@@ -8,8 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.currencyConvertor.json.CurrencyJSON;
-import com.currencyConvertor.json.Rates;
+import com.currencyConvertor.main.json.CurrencyJSON;
+import com.currencyConvertor.main.json.Rates;
 import com.currencyConvertor.main.model.CurrencyEntity;
 import com.currencyConvertor.main.model.User;
 import com.currencyConvertor.main.repository.CurrencyRepository;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.currencyConvertor.json.CurrencyJSON;
+import com.currencyConvertor.main.json.CurrencyJSON;
 import com.currencyConvertor.main.model.User;
 import com.currencyConvertor.main.service.SecurityService;
 import com.currencyConvertor.main.service.UserService;
