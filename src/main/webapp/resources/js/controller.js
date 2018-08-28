@@ -69,6 +69,7 @@ app.controller('getController', function($scope, $http, $location, $window) {
 	}
 
 	$scope.getHistoricRates = function() {
+//		86400000 MiliSeconds in a day.
 		$http(
 				{
 					method : 'GET',
@@ -78,7 +79,7 @@ app.controller('getController', function($scope, $http, $location, $window) {
 			console.log(response.data);
 			$scope.getHistDateDivAvailable = true;
 			$scope.histCurrencyJson = response.data;
-			$scope.histCurrencyJson.timestamp = response.data.timestamp * 1000;
+			$scope.histCurrencyJson.timestamp = (response.data.timestamp * 1000) - 86400000;
 			$scope.saveData($scope.histCurrencyJson);
 		}, function errorCallback(response) {
 			console.log(response);

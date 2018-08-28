@@ -30,7 +30,8 @@ EmailValidation Pattern Used:
 Note: Currency Date timestamp is unique field to avoid duplication of data. If Want to allow duplication Please remove unique = true from callDate column from CurrencyEntity.java 
 
 Possible Bug Present in openexchangerates.org in Historic Rates API.
-	-Response of Historic Rates API send TimeStamp date of next date to historic date. Ex: If I hit for 12-Feb-2018 then API response contains the TimeStamp for 13-Feb-2018. 		
+	-Response of Historic Rates API send TimeStamp date of next date to historic date. Ex: If I hit for 12-Feb-2018 then API response contains the TimeStamp for 13-Feb-2018. 
+		Fix: Deducted the 86400000(MiliSeconds in a day) MiliSeconds to convert it to right date.
 	
 
 	
