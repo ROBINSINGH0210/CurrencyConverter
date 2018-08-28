@@ -1,5 +1,6 @@
 package com.currencyConvertor.main.service;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -54,20 +55,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<CurrencyJSON> getPreviousDetails() {
 		List<CurrencyJSON> list = new ArrayList<>();
-		ObjectMapper mapper = new ObjectMapper();
 		List<CurrencyEntity> dataList = currencyRepository.findTop10ByOrderByIdDesc();
-		dataList.forEach(e -> {
-			CurrencyJSON json = new CurrencyJSON();
-			json.setBase(e.getBase());
-			json.setTimestamp(e.getCallDate().getTime());
+		dataList.forEach(e -> this.dtoTOJSONList(list, e));
+		return list;
+	}
+	
+	private void dtoTOJSONList(List<CurrencyJSON> list, CurrencyEntity e) {
+		ObjectMapper mapper = new ObjectMapper();
+		CurrencyJSON json = new CurrencyJSON();
+		json.setBase(e.getBase());
+		json.setTimestamp(e.getCallDate().getTime());
 			try {
 				json.setRates(mapper.readValue(e.getRates(), Rates.class));
-			} catch (Exception e1) {
+			} catch (IOException e1) {
 				e1.printStackTrace();
-			}
-			list.add(json);
-		});
-		return list;
+			} 
+		list.add(json);	
 	}
 	
 }

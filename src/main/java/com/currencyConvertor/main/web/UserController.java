@@ -66,16 +66,4 @@ public class UserController {
 		return "welcome";
 	}
 
-	@Cacheable("historicalData")
-	@RequestMapping(value = "/getData", method = RequestMethod.GET)
-	@ResponseBody
-	public List<CurrencyJSON> getHistoricalData() {
-		return userService.getPreviousDetails();
-	}
-
-	@RequestMapping(value = "/saveData", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public String saveCurrentData(@RequestBody CurrencyJSON request) {
-		return userService.saveCurrencyDetails(request);
-	}
 }

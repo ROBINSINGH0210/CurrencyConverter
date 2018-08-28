@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
 			<h2 class="form-signin-heading">Create your account</h2>
 			<spring:bind path="email">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<form:input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" path="email" class="form-control"
+					<form:input type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/" path="email" class="form-control"
 						placeholder="Email" autofocus="true" required="true"></form:input>
 					<form:errors path="email"></form:errors>
 				</div>
