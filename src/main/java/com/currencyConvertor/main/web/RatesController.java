@@ -3,7 +3,6 @@ package com.currencyConvertor.main.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ public class RatesController {
 	@Autowired
 	private UserService userService;
 	
-	@Cacheable("historicalData")
 	@RequestMapping(value = "/getData", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CurrencyJSON> getHistoricalData() {

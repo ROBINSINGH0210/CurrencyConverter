@@ -25,25 +25,25 @@
 	name="author"
 	content="">
 <title>Currency Rates</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<link
-	rel="stylesheet"
-	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link
 	href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
-<script src="${contextPath}/resources/js/jquery-3.3.1.min.js" ></script>
+<script src="${contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script src="${contextPath}/resources/js/jquery-ui.js"></script>
 <script src="${contextPath}/resources/js/angular.min.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/jquery-ui.css">
-<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link
+	rel="stylesheet"
+	href="${contextPath}/resources/css/jquery-ui.css">
+<link
+	href="${contextPath}/resources/css/bootstrap.min.css"
+	rel="stylesheet">
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/controller.js"></script>
 </head>
 <body>
-	<div class="container" ng-app="app">
+	<div
+		class="container"
+		ng-app="app">
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 			<form
 				id="logoutForm"
@@ -84,7 +84,7 @@
 					id="datepicker"
 					type="text"
 					ng-model="histdate"
-					ng-disabled="!to"
+					ng-disabled="!amt"
 					placeholder="Historic Date"
 					required="true"></input>
 				<button
@@ -97,7 +97,8 @@
 					style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px"
 					ng-if="getHistDateDivAvailable">
 					<strong>Publish Date:</strong>{{histCurrencyJson.date}} <br /> {{" From: " + histCurrencyJson.query.from + " To: "
-					+ histCurrencyJson.query.to + " Amount: " +histCurrencyJson.query.amount + " Quote: "+ histCurrencyJson.info.quote + " Result: " +histCurrencyJson.result}}
+					+ histCurrencyJson.query.to + " Amount: " +histCurrencyJson.query.amount + " Quote: "+ histCurrencyJson.info.quote
+					+ " Result: " +histCurrencyJson.result}}
 				</div>
 				</br> </br>
 				<button
@@ -109,8 +110,9 @@
 					style="background-color: #67597E; color: white; padding: 20px 20px 20px 20px"
 					ng-if="getHistDivAvailable">
 					<ul>
-						<li ng-repeat="curr in histCurrData"><strong>Publish Date:</strong>{{curr.date}} <br /> {{" From: " + curr.query.from + " To: "
-					+ curr.query.to + " Amount: " +curr.query.amount + " Quote: "+ curr.info.quote + " Result: " +curr.result}}
+						<li ng-repeat="curr in histCurrData"><strong>Publish Date:</strong>{{curr.date}} <br /> {{" From: " +
+							curr.query.from + " To: " + curr.query.to + " Amount: " +curr.query.amount + " Quote: "+ curr.info.quote + "
+							Result: " +curr.result}}
 					</ul>
 				</div>
 			</div>
