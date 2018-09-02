@@ -1,7 +1,5 @@
 package com.currencyConvertor.main.json;
 
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,52 +7,63 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "timestamp", "base", "rates" })
-public class CurrencyJSON implements Serializable {
-	@JsonProperty("timestamp")
-	private Long timestamp;
-	@JsonProperty("base")
-	private String base;
-	@JsonProperty("rates")
-	private Rates rates;
-	@JsonIgnore
-	private final static long serialVersionUID = 5089017721980439372L;
+@JsonPropertyOrder({ "query", "info", "date", "result" })
+public class CurrencyJSON {
 
-	@JsonProperty("timestamp")
-	public Long getTimestamp() {
-		return timestamp;
+	@JsonProperty("query")
+	private Query query;
+	@JsonProperty("info")
+	private Info info;
+	@JsonProperty("date")
+	private String date;
+	@JsonProperty("result")
+	private Double result;
+
+	@JsonProperty("query")
+	public Query getQuery() {
+		return query;
 	}
 
-	@JsonProperty("timestamp")
-	public void setTimestamp(Long timestamp) {
-		this.timestamp = timestamp;
+	@JsonProperty("query")
+	public void setQuery(Query query) {
+		this.query = query;
 	}
 
-	@JsonProperty("base")
-	public String getBase() {
-		return base;
+	@JsonProperty("info")
+	public Info getInfo() {
+		return info;
 	}
 
-	@JsonProperty("base")
-	public void setBase(String base) {
-		this.base = base;
+	@JsonProperty("info")
+	public void setInfo(Info info) {
+		this.info = info;
 	}
 
-	@JsonProperty("rates")
-	public Rates getRates() {
-		return rates;
+	@JsonProperty("date")
+	public String getDate() {
+		return date;
 	}
 
-	@JsonProperty("rates")
-	public void setRates(Rates rates) {
-		this.rates = rates;
+	@JsonProperty("date")
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	@JsonProperty("result")
+	public Double getResult() {
+		return result;
+	}
+
+	@JsonProperty("result")
+	public void setResult(Double result) {
+		this.result = result;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CurrencyJSON [timestamp=").append(timestamp).append(", base=").append(base).append(", rates=")
-				.append(rates).append("]");
+		builder.append("CurrencyJSON [query=").append(query).append(", info=").append(info).append(", date=").append(date)
+				.append(", result=").append(result).append("]");
 		return builder.toString();
 	}
 

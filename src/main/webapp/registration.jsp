@@ -14,12 +14,11 @@
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script src="${contextPath}/resources/js/angular.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/jquery-ui.css">
+<script src="${contextPath}/resources/js/jquery-3.3.1.min.js" ></script>
+<script src="${contextPath}/resources/js/jquery-ui.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script>
 $.noConflict();
 jQuery(document).ready(function ($) {
@@ -45,7 +44,7 @@ jQuery(document).ready(function ($) {
 			<h2 class="form-signin-heading">Create your account</h2>
 			<spring:bind path="email">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<form:input type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/" path="email" class="form-control"
+					<form:input type="email" path="email" class="form-control"
 						placeholder="Email" autofocus="true" required="true"></form:input>
 					<form:errors path="email"></form:errors>
 				</div>
@@ -75,8 +74,5 @@ jQuery(document).ready(function ($) {
 
 	</div>
 	<!-- /container -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
