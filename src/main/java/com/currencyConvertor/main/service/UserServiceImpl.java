@@ -2,6 +2,7 @@ package com.currencyConvertor.main.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -46,10 +47,8 @@ public class UserServiceImpl implements UserService {
 	@Cacheable("historicalData")
 	@Override
 	public List<CurrencyJSON> getPreviousDetails() {
-		List<CurrencyJSON> list = new ArrayList<>();
 		List<CurrencyEntity> dataList = currencyRepository.findTop10ByOrderByIdDesc();
-		dataList.forEach(e -> CurrencyConverterUtil.dtoTOJSONList(list, e));
-		return list;
+		return dataList.stream().map(CurrencyConverterUtil::dtoTOJSONObject).collect(Collectors.toList());
 	}
 	
 }

@@ -61,7 +61,7 @@ public class RateControllerTest {
 	@Test
 	public void testSaveData_SuccessOnPostTypeRequest() throws Exception {
 		CurrencyJSON currencyJSON = new CurrencyJSON();
-		currencyJSON.setDate(CurrencyConverterUtil.formatter.format(new Date()));
+		currencyJSON.setDate(CurrencyConverterUtil.FORMATTER.format(new Date()));
 		Info info = new Info();
 		info.setQuote(60.20);
 		info.setTimestamp(15025525);

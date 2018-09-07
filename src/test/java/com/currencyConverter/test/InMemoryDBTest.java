@@ -36,7 +36,7 @@ public class InMemoryDBTest {
 
 	public CurrencyJSON prepareJSON() {
 		CurrencyJSON currencyJSON = new CurrencyJSON();
-		currencyJSON.setDate(CurrencyConverterUtil.formatter.format(new Date()));
+		currencyJSON.setDate(CurrencyConverterUtil.FORMATTER.format(new Date()));
 		Info info = new Info();
 		info.setQuote(60.2);
 		Query query = new Query();
